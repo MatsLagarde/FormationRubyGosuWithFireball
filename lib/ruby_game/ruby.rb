@@ -1,7 +1,7 @@
 module RubyGame
   class Ruby < Container
-    def initialize(scenary, positionX, positionY)
-      super(scenary, positionX, positionY, "ruby.png")
+    def initialize(positionX, positionY,motif="ruby.png")
+      super
     end
   end
 end
