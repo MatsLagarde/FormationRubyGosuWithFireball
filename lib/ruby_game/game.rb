@@ -100,17 +100,12 @@ module RubyGame
     end
 
     def cheer_up()
-      case @score
-      when @score>300
-        @cheers = "You're GOOOOD LIKE"
-      when @score>200
-        @cheers = "OVERKILLLL"
-      when @score>150
-        @cheers = "Super KIILL"
-      when @score>100
-        @cheers = "Great"
-      when @score>50
-        @cheers = "Not bad continue"
+      @cheers = case @score
+        when 0..50 then "Not bad continue"
+        when 51..100 then "Great"
+        when 101..200 then "Super KIILL"
+        when 201..300 then "OVERKILLLL"
+        else "You're GOOOOD LIKE"
       end
     end
 
@@ -129,20 +124,19 @@ module RubyGame
       @monstres.each { |monstre| monstre.draw }
     end
 
-
-    def start!(&block)
-      @state = :running
+    def init_static_values()
       @monstres = []
       @spells = []
       @score = 0
       @cheers = ""
-      if block_given?
-        @params = block
-        block.call(self)
-        self.show
-      else
-        @params.call(self)
-      end
+      @state = :running
+    end
+
+    def start!(&block)
+      init_static_values
+      @init = block if block_given?
+      self.instance_eval(&@init)
+      self.show if block_given?
     end
 
 
