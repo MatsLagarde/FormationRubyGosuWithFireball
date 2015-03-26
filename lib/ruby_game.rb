@@ -1,6 +1,7 @@
 require "gosu"
 require "awesome_print"
 require_relative "ruby_game/container"
+require_relative "ruby_game/abilities"
 require_relative "ruby_game/player"
 require_relative "ruby_game/ruby"
 require_relative "ruby_game/monster"
